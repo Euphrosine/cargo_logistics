@@ -1,0 +1,40 @@
+{%extends "register/base.html"%}  
+
+{%block content%}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>Name</td>
+            <td>Surname</td>
+            <td>Email</td>
+            <td>Telephone no</td>
+            <td>
+                <a href="{%url 'register:user_insert'%}" class="btn btn-outline-success">
+                    <i class="fas fa-plus"></i>Add New
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {%for user in user_list%}
+        <tr>
+            <td>{{user.name}}</td>
+            <td>{{user.surname}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.telephone_no}}</td>
+            <td>
+                <a href="{%url 'register:user_update' user.id%}" class="btn btn-outline-warning text-secondary">
+                    <i class="faar fa-lg"></i>Update
+                </a>
+                <form action="{%url 'register:user_delete' user.id%}" method="post" class="d-inline">
+                    {%csrf_token%}
+                    <button type="submit" class="btn btn-danger">
+                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>Delete
+                    </button>
+                </form>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
+{%endblock content%} 
